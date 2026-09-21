@@ -85,3 +85,4 @@ Sistema-Multi-Agente-Jasmin/
 *[Sistema Multi-Agente Jasmin - Creado por Dr. Gera]*
 *[Agente #3 Laura_Evergarden - Configuración inicial]*
 
+
