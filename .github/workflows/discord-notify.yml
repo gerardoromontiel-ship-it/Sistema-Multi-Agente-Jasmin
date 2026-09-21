@@ -1,0 +1,28 @@
+name: Discord Notification
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  issues:
+    types: [opened, closed]
+  release:
+    types: [published]
+
+jobs:
+  notify-discord:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send notification to Discord
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        with:
+          args: |
+            🌸 **Notificación GitHub — Sistema Multi-Agente Jasmin** 🌸
+            **Evento:** ${{ github.event_name }}
+            **Rama:** ${{ github.ref_name }}
+            **Autor:** ${{ github.actor }}
+            **Repositorio:** ${{ github.repository }}
+            **URL:** ${{ github.event.head_commit.url || github.event.pull_request.html_url || github.event.issue.html_url || 'N/A' }}
