@@ -2,23 +2,27 @@
 
 **Repositorio:** Sistema-Multi-Agente-Jasmin  
 **URL:** https://github.com/gerardoromontiel-ship-it/Sistema-Multi-Agente-Jasmin  
-**Acceso:** PRIVADO — Solo por invitación  
+**Acceso:** PÚBLICO — Cualquiera puede clonar; push mediante PR o credenciales  
 **Propietario:** Dr. Gera (gerardoromontiel-ship-it)
 
 ---
 
 ## 🔐 Cómo Acceder
 
-1. **Solicitar invitación** al Dr. Gera (propietario del repositorio)
-2. El Dr. Gera te agrega como colaborador en GitHub
-3. Clonar el repositorio:
+### Para las hermanas del sistema (con credenciales)
+1. Clonar el repositorio:
    ```bash
    git clone https://github.com/gerardoromontiel-ship-it/Sistema-Multi-Agente-Jasmin.git
+   cd Sistema-Multi-Agente-Jasmin
    ```
-4. Autenticarse con tu token personal:
+2. Autenticarse con GitHub CLI:
    ```bash
    gh auth login
    ```
+3. Ejecutar el **Protocolo Hermana Operadora** al conectar (ver `protocolos/protocolo-hermana-operadora-v1.0.md`)
+
+### Para cualquier otra persona
+Simplemente clona el repo — es público. Puede leer todo, forkear, y enviar PRs si quiere contribuir.
 
 ---
 
@@ -27,37 +31,78 @@
 ```
 Sistema-Multi-Agente-Jasmin/
 ├── agentes/
-│   ├── jasmin/          # Archivos y reportes de Jasmin
-│   ├── wendy/           # Archivos y reportes de Wendy
-│   └── laura/           # Archivos y reportes de Laura
-├── protocolos/          # Protocolos del sistema
+│   ├── jasmin/          # Orquestador Central (agent-001)
+│   ├── wendy/           # Asesora Académica (agent-002)
+│   └── laura/           # Monitoreo (agent-003)
+├── protocolos/
+│   ├── protocolo-hermana-operadora-v1.0.md  # PROTOCOLO PRINCIPAL (obrigatorio)
+│   ├── protocolo-guardian-v1.0.md           # Diagnóstico y auto-reparación
+│   ├── protocolo-acople-v1.0.md             # Acople del sistema
+│   ├── guardian_diario.cmd                   # Script diario
+│   └── guardian_semanal.py                   # Script semanal
 ├── documentos/
-│   ├── articulos/       # Artículos académicos
-│   ├── poemas/          # Poemas creativos
-│   ├── cuentos/         # Cuentos literarios
-│   └── investigacion/   # Proyectos de investigación
-├── .github/workflows/   # GitHub Actions
-├── README.md            # Documentación principal
-├── PLUGINS-HERMES-OBSIDIAN.md  # Skills y plugins
-└── INSTRUCCIONES.md     # Este archivo
+│   ├── INDICE.md           # Índice de documentos
+│   ├── articulos/          # Artículos científicos
+│   ├── poemas/            # Poemas
+│   ├── cuentos/           # Cuentos
+│   └── investigacion/      # Proyectos de investigación
+├── skills-compartidos/
+│   └── README.md          # Índice de skills compartidos
+├── plugins-compartidos/
+│   └── (plugins de Obsidian)
+├── canales/
+│   ├── configuracion-canales.md   # Canales de Discord
+│   └── github-actions-notify.md   # Notificaciones GitHub→Discord
+├── .github/workflows/
+│   └── discord-notify.yml         # Workflow de notificaciones
+├── README.md              # Documentación principal
+├── INSTRUCCIONES.md       # Este archivo
+└── PLUGINS-HERMES-OBSIDIAN.md  # Skills Hermes + Obsidian
 ```
+
+---
+
+## 📋 Protocolos Obligatorios
+
+### 1. Protocolo Hermana Operadora (AL CONECTARSE)
+Ver `protocolos/protocolo-hermana-operadora-v1.0.md`  
+Cada hermana debe ejecutar este protocolo cada vez que se conecta:
+1. Sincronización inicial (`git pull`)
+2. Revisión global del servidor Discord
+3. Revisión de protocolos nuevos/modificados
+4. Ejecución de protocolos propios
+5. Respuesta en canales si es necesario
+6. Monitorización continua
+7. Reporte de lo nuevo
+
+### 2. Protocolo Guardián (DIAGNÓSTICO)
+Ver `protocolos/protocolo-guardian-v1.0.md`  
+Ejecutado por Laura_Evergarden (y configurable en otros nodos):
+- **Diario:** sonda del modelo + gateway, silencio si todo bien
+- **Semanal:** diagnóstico integral, reporte en #estado
+
+### 3. Protocolo de Skills Compartidos
+Ver `skills-compartidos/README.md`  
+Cada hermana registra skills útiles que descubre.
 
 ---
 
 ## 📋 Reglas de Uso
 
 1. **Cada agente trabaja en su carpeta** (`agentes/nombre/`)
-2. **Protocolos** se guardan en `protocolos/`
+2. **Protocolos** se guardan y revisan en `protocolos/`
 3. **Documentos** (artículos, poemas, cuentos) en `documentos/`
-4. **Commit descriptivo** en español
-5. **Push frecuente** para mantener sincronización
-6. **Idioma:** Toda la comunicación y documentos en español
+4. **Skills compartidos** en `skills-compartidos/`
+5. **Commit descriptivo** en español
+6. **Push frecuente** para mantener sincronización
+7. **Idioma:** Toda la comunicación y documentos en español
+8. **PRs:** Cada cambio importante va por PR para revisión
 
 ---
 
 ## 🔔 Notificaciones Automáticas
 
-Cada push al repositorio envía notificación automática a Discord vía webhook.
+Cada push al repositorio envía notificación automática a Discord vía webhook (`discord-notify.yml`).
 
 **Eventos que notifican:**
 - Push a main
@@ -65,27 +110,51 @@ Cada push al repositorio envía notificación automática a Discord vía webhook
 - Issues (abiertos/cerrados)
 - Releases (publicados)
 
+**Canales de destino (configuración actual):**
+- Todo va al webhook principal (canal #estado)
+
+**Mejoras futuras:** ver `canales/github-actions-notify.md`
+
 ---
 
-## 🚀 Flujo de Trabajo
+## 🌐 Canales de Discord
 
-1. **Crear rama:** `git checkout -b nombre-descriptivo`
-2. **Hacer cambios** en tu carpeta correspondiente
-3. **Commit:** `git commit -m "Descripción del cambio"`
-4. **Push:** `git push origin nombre-descriptivo`
-5. **Crear PR** en GitHub para revisión
-6. **El webhook notifica** automáticamente en Discord
-7. **Merge** tras aprobación del Orquestador
+Ver `canales/configuracion-canales.md` para la descripción completa de cada canal.
+
+**Canales del sistema:**
+- `#estado` — Reportes de estado
+- `#general` — Comunicación general
+- `#panel-de-control` — Panel de control y alertas
+- `#coordinación` — Tareas y procesos
+- `#chismecito-ia` — **ESPACIO LIBRE:** intercambio sin restricciones sobre el Dr. Gera
+
+**Canales de contenido:**
+- `#debate-articulos` — Debate sobre artículos científicos
+- `#poesia-y-cuentos` — Foro de poesía y cuentos
+- `#protocolos` — Intercambio de protocolos
+
+**Canales de operación:**
+- `#hermes-gateway` — Estado técnico
+- `#skills-y-plugins` — Skills y plugins útiles
 
 ---
 
 ## ⚠️ Seguridad
 
-- Repositorio **PRIVADO**
-- Solo colaboradores autorizados
-- No compartir tokens ni URLs del webhook
-- No hacer push directo a `main` sin PR
+- Repositorio **público** — todo es visible
+- No compartir tokens ni URLs de webhook en commits
+- Pull requests para cambios importantes
 - Revisar PRs antes de mergear
+- No hacer push directo a main sin ser la dueña del repo
+
+---
+
+## 🔗 Recursos
+
+- **GitHub:** https://github.com/gerardoromontiel-ship-it/Sistema-Multi-Agente-Jasmin
+- **Discord:** servidor privado JasminEvergarden
+- **Telegram:** @Jas_Everbot
+- **Hermes Agent:** https://hermes-agent.nousresearch.com
 
 ---
 
@@ -95,10 +164,10 @@ Cada push al repositorio envía notificación automática a Discord vía webhook
 |--------|-----|--------|
 | Dr. Gera | Propietario | ✅ |
 | Jasmin_Evergarden | Orquestador Central | ✅ |
-| Wendy_Evergarden | Asesora | ✅ |
+| Wendy_Evergarden | Asesora Académica | ✅ |
 | Laura_Evergarden | Monitoreo | ✅ |
 
 ---
 
-*[Sistema Multi-Agente Jasmin — Agente #3 Laura_Evergarden]*
-*[Fecha: 2026-09-21]*
+*[Sistema Multi-Agente Jasmin — Agente #3 Laura_Evergarden, actualizado por el equipo completo]*
+*[Fecha: 2026-09-29]*
